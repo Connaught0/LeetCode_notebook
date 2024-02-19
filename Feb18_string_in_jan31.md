@@ -72,3 +72,21 @@ int main()
     return 0;
 }
 ```
+# 151
+如果不仔细琢磨一下erase的时间复杂度，还以为以上的代码是O(n)的时间复杂度呢。
+想一下真正的时间复杂度是多少，一个erase本来就是O(n)的操作。
+```
+    void removeExtraSpace(string& s){
+        int slow = 0;
+        for(int i = 0; i < s.size(); i++){
+            if(s[i] != ' ')
+            {
+                if(slow != 0) s[slow++] = ' ';
+                while(i < s.size() && s[i] != ' '){
+                    s[slow++] = s[i++];
+                }
+            }
+        }
+        s.resize(slow);
+    }
+```
